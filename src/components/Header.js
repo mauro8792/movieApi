@@ -15,9 +15,6 @@ import {
 
 
 export default class Header extends React.Component{
-    constructor(){
-        super();
-    }
 
     render(){
         return(
