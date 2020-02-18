@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "./Login.js";
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
@@ -8,7 +9,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    NavLink
   } from "react-router-dom";
 
 
@@ -21,11 +23,11 @@ export default class Header extends React.Component{
         return(
             <>
             <Router>
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="dark" variant="dark" fixed="top">
                     <Link to="/home"><Navbar.Brand>MovieApp</Navbar.Brand></Link>
                     <Nav className="mr-auto">
-                        <Link to="/home"><Nav.Link>Inicio</Nav.Link></Link>
-                        <Nav.Link href="#features">Iniciar sesión</Nav.Link>
+                                <NavLink to="/home" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
+                                <NavLink to="/login" style={{ color: 'white', padding: 10 }} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Iniciar sesión</NavLink>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Buscar por nombre" className="mr-sm-2" />
@@ -35,6 +37,9 @@ export default class Header extends React.Component{
                 <Switch>
                     <Route path="/home">
                            {/* <Home /> */} {/*Aca se va a dirigir al home, cuando este exista, que es la lista total de peliculas*/ }
+                    </Route>
+                    <Route path="/login">
+                            <Login/>
                     </Route>
                 </Switch>
             </Router>
