@@ -1,6 +1,7 @@
 import React from 'react';
 //Componentes programados
-import Header from "./Header.js"
+import Header from "./Header.js";
+import MovieCard from "./MovieCard.js";
 
 
 
@@ -37,7 +38,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('populares', JSON.stringify(data));
+        localStorage.setItem('populares', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -49,7 +50,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('nowPlaying', JSON.stringify(data));
+        localStorage.setItem('nowPlaying', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -60,7 +61,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('upComing', JSON.stringify(data));
+        localStorage.setItem('upComing', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -76,10 +77,18 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
+   const movies= JSON.parse(localStorage.getItem('populares'));
+   console.log(movies);
+      
   return (
-    <Header 
-      //moviesPopulares = JSON.parse(localStorage.getItem('populares'))
-    />
+    <>
+        <Header/>
+        <div className="container">
+        {movies && movies.map((movie, key)=>(
+          <MovieCard movie={ movie } key={key} />
+        ))}
+      </div>
+    </>
   );
    }
  }
