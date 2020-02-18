@@ -6,57 +6,80 @@ import Header from "./Header.js"
 
 
 class App extends React.Component {
-  
-    state ={
+  constructor(){
+    super();
+    this.state  ={
       result : '',
       query:'',
       error : ''
     }
+  }
   
   componentDidUpdate(prevProps, prevState){
-    /* console.log(prevState.result.page);
-    console.log(this.state.result.page); */
     
     if(prevState.query.page !== this.state.query.page){
       this.callApi();
-      console.log("hola");
       
     }  
   } 
   // llamada a la api para las peliculas mas popularesit
-  callApi = ()=>{
 
+  
+
+  callApi = ()=>{
     const keyApi= 'ce62b7f668a97b07e6d58a85df75641b';
-    const urlApi= `https://api.themoviedb.org/3/movie/popular?api_key=${keyApi}&page=1`;
-    fetch(urlApi)
+    const urlApiPopular= `https://api.themoviedb.org/3/movie/popular?api_key=${keyApi}&page=1&region=AR`;
+    const urlApiNowPlaying= `https://api.themoviedb.org/3/movie/now_playing?api_key=${keyApi}&page=1&region=AR`;
+    const urlApiUpComing= `https://api.themoviedb.org/3/movie/upcoming?api_key=${keyApi}&page=1&region=AR`;
+    
+    fetch(urlApiPopular)
       .then(response=>{
         return response.json()
       })
       .then(data=>{
-        this.setState({
-          result : data
-        })
+        localStorage.setItem('populares', JSON.stringify(data));
       })
       .catch(error=>{
         console.log(error);
         
+    })
+
+    fetch(urlApiNowPlaying)
+      .then(response=>{
+        return response.json()
       })
-  }
-  datosConsulta = response =>{
-    
-      this.setState({
-        query: response
+      .then(data=>{
+        localStorage.setItem('nowPlaying', JSON.stringify(data));
       })
+      .catch(error=>{
+        console.log(error);
+        
+    })
+    fetch(urlApiUpComing)
+      .then(response=>{
+        return response.json()
+      })
+      .then(data=>{
+        localStorage.setItem('upComing', JSON.stringify(data));
+      })
+      .catch(error=>{
+        console.log(error);
+        
+    })
     
   }
 
+
+  // JSON.parse(localStorage.getItem('user'))
+
  render(){
-   for (let i = 0; i < 1; i++) {
+   for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
-     
   return (
-    <Header/>
+    <Header 
+      //moviesPopulares = JSON.parse(localStorage.getItem('populares'))
+    />
   );
    }
  }
