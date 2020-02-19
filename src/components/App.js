@@ -1,7 +1,6 @@
 import React from 'react';
 //Componentes programados
-import Header from "./Header.js";
-import MovieCard from "./MovieCard.js";
+import User from "../pages/User.js";
 
 
 
@@ -77,17 +76,12 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
-   const movies= JSON.parse(localStorage.getItem('populares'));
-   console.log(movies);
+  // const movies= JSON.parse(localStorage.getItem('populares'));
+   //console.log(movies);
       
   return (
     <>
-        <Header/>
-        <div className="container">
-        {movies && movies.map((movie, key)=>(
-          <MovieCard movie={ movie } key={key} />
-        ))}
-      </div>
+       <User />
     </>
   );
    }
