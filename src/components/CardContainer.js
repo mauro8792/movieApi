@@ -6,7 +6,7 @@ import Filters from "./Filters.js";
 export default class CardContainer extends React.Component{
 
     render(){
-        let {movies} = this.props;
+        const movies= JSON.parse(localStorage.getItem('populares'));
         return(
             <>
                         <Filters style={{padding: 50}}/>

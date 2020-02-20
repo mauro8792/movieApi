@@ -1,8 +1,7 @@
 import React from 'react';
 //Componentes programados
+import Admin from "../pages/Admin.js";
 import User from "../pages/User.js";
-//import Admin from "../pages/Admin.js";
-
 
 
 
@@ -109,25 +108,16 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
-   
-  //  //Se chequea si el usuario logueado es administrador, si lo es, lo manda a la vista de admin
-  //  let resultado= this.state.user.admin;
-  //  if (resultado && resultado.admin){
-  //   return (
-  //     <Admin/>
-  //   );
-  //  }
-  //  //si no está logueado o no es admin, lo lleva a la vista de usuario
-  //  else {
-  //     return (
-  //       <User login={this.login} />
-  //     );
-  //   }
-  
-   return(
-   <User login={this.login}/>
-   );
+    let login= this.login;
+    let user= this.state.user;
 
+    if(user && user.admin){
+      return <Admin  user={user} login={login}/>
+    }
+    else{
+     return  <User  user={user} login={login}/>
+    }
+  
    }
  }
 export default App;
