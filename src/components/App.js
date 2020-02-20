@@ -1,9 +1,9 @@
 import React from 'react';
 //Componentes programados
+import Admin from "../pages/Admin.js";
 import User from "../pages/User.js";
 import userService from '../service/userService';
 import movieService from '../service/movieService';
-
 
 
 
@@ -75,11 +75,16 @@ class App extends React.Component {
     
   }
  render(){
-  
-      
-  return (
-    <User login={this.login} searchForName={this.searchForName} />
-  );
+
+    let login= this.login;
+    let user= this.state.user;
+
+    if(user && user.admin){
+      return <Admin  user={user} login={login} searchForName={this.searchForName}/>
+    }
+    else{
+     return  <User  user={user} login={login} searchForName={this.searchForName}/>
+    }
    }
  }
 export default App;
