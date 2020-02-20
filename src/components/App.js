@@ -1,7 +1,7 @@
 import React from 'react';
 //Componentes programados
+import Admin from "../pages/Admin.js";
 import User from "../pages/User.js";
-
 
 
 
@@ -108,12 +108,16 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
-  // const movies= JSON.parse(localStorage.getItem('populares'));
-   //console.log(movies);
-      
-  return (
-    <User login={this.login} />
-  );
+    let login= this.login;
+    let user= this.state.user;
+
+    if(user && user.admin){
+      return <Admin  user={user} login={login}/>
+    }
+    else{
+     return  <User  user={user} login={login}/>
+    }
+  
    }
  }
 export default App;

@@ -5,11 +5,10 @@ import Header from "../components/Header.js";
 export default class User extends React.Component{
     
     render(){
-        const movies= JSON.parse(localStorage.getItem('populares'));
         return (
-            <>
-                <Header login= {this.props.login}/>                
-                <CardContainer movies={movies} />
+            <> 
+                <Header user={this.props.user} login={this.props.login}/>         
+                <CardContainer />
             </>
         )
     }

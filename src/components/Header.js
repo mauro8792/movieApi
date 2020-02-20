@@ -12,12 +12,22 @@ import {
     Link,
     NavLink
   } from "react-router-dom";
-  import User from '../pages/User.js';
+import CardContainer from "./CardContainer.js";
 
 
 export default class Header extends React.Component{
-
+    
+    
     render(){
+
+        var result;
+        if(this.props.user){
+            result= <Login login={this.props.login} />
+        }
+        else{
+            result= null;
+        }
+
         return(
             <>
             <Router>
@@ -25,6 +35,7 @@ export default class Header extends React.Component{
                     <Link to="/home"><Navbar.Brand>MovieApp</Navbar.Brand></Link>
                     <Nav className="mr-auto">
                                 <NavLink to="/home" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
+                                <NavLink to="/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
                                 <NavLink to="/login" style={{ color: 'white', padding: 10 }} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Iniciar sesión</NavLink>
                     </Nav>
                     <Form inline>
@@ -34,12 +45,13 @@ export default class Header extends React.Component{
                 </Navbar>
                 <Switch>
                     <Route path="/home">
-                           {/**/  } {/*Aca se va a dirigir al home, cuando este exista, que es la lista total de peliculas*/ }
+                        
+                    </Route>
+                    <Route path="/movies">              
+                        <CardContainer/>
                     </Route>
                     <Route path="/login">
-                            <Login
-                                login= {this.props.login}
-                            />
+                        {result}
                     </Route>
                 </Switch>
             </Router>

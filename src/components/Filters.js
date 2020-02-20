@@ -7,7 +7,7 @@ render(){
 
     return(   
     <>    
-        <Dropdown style={{"padding-top":80, "padding-left": 50}}>
+        <Dropdown style={{"paddingTop":80, "paddingLeft": 50}}>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
             Categorías
             </Dropdown.Toggle>
