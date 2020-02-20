@@ -36,7 +36,9 @@ export default class Header extends React.Component{
                            {/* <Home /> */} {/*Aca se va a dirigir al home, cuando este exista, que es la lista total de peliculas*/ }
                     </Route>
                     <Route path="/login">
-                            <Login/>
+                            <Login
+                                login= {this.props.login}
+                            />
                     </Route>
                 </Switch>
             </Router>
