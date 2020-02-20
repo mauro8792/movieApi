@@ -68,9 +68,10 @@ class App extends React.Component {
   searchForName = (name) =>{
     console.log('name',name);
     movieService.getMovieForNme(name).then(data=>{
-      console.log('data', data);
-      
-      return  data
+     console.log('data', data);
+     localStorage.setItem('busqueda', JSON.stringify(data));
+       return  data
+
     })
     
   }
