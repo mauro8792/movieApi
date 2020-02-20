@@ -8,7 +8,7 @@ export default class User extends React.Component{
         const movies= JSON.parse(localStorage.getItem('populares'));
         return (
             <>
-                <Header/>                
+                <Header login= {this.props.login}/>                
                 <CardContainer movies={movies} />
             </>
         )

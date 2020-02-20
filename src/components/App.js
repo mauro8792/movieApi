@@ -112,10 +112,7 @@ class App extends React.Component {
    //console.log(movies);
       
   return (
-    <Header 
-      login = {this.login}
-      //moviesPopulares = JSON.parse(localStorage.getItem('populares'))
-    />
+    <User login={this.login} />
   );
    }
  }
