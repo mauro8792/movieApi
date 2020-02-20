@@ -1,6 +1,7 @@
 import React from 'react';
 //Componentes programados
 import User from "../pages/User.js";
+//import Admin from "../pages/Admin.js";
 
 
 
@@ -108,12 +109,25 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
-  // const movies= JSON.parse(localStorage.getItem('populares'));
-   //console.log(movies);
-      
-  return (
-    <User login={this.login} />
-  );
+   
+  //  //Se chequea si el usuario logueado es administrador, si lo es, lo manda a la vista de admin
+  //  let resultado= this.state.user.admin;
+  //  if (resultado && resultado.admin){
+  //   return (
+  //     <Admin/>
+  //   );
+  //  }
+  //  //si no está logueado o no es admin, lo lleva a la vista de usuario
+  //  else {
+  //     return (
+  //       <User login={this.login} />
+  //     );
+  //   }
+  
+   return(
+   <User login={this.login}/>
+   );
+
    }
  }
 export default App;
