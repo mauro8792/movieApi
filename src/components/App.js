@@ -1,6 +1,6 @@
 import React from 'react';
 //Componentes programados
-import Header from "./Header.js"
+import User from "../pages/User.js";
 
 
 
@@ -83,7 +83,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('nowPlaying', JSON.stringify(data));
+        localStorage.setItem('nowPlaying', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -94,7 +94,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('upComing', JSON.stringify(data));
+        localStorage.setItem('upComing', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -108,6 +108,9 @@ class App extends React.Component {
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
+  // const movies= JSON.parse(localStorage.getItem('populares'));
+   //console.log(movies);
+      
   return (
     <Header 
       login = {this.login}

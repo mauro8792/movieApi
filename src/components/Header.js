@@ -12,6 +12,7 @@ import {
     Link,
     NavLink
   } from "react-router-dom";
+  import User from '../pages/User.js';
 
 
 export default class Header extends React.Component{
@@ -33,7 +34,7 @@ export default class Header extends React.Component{
                 </Navbar>
                 <Switch>
                     <Route path="/home">
-                           {/* <Home /> */} {/*Aca se va a dirigir al home, cuando este exista, que es la lista total de peliculas*/ }
+                           {/**/  } {/*Aca se va a dirigir al home, cuando este exista, que es la lista total de peliculas*/ }
                     </Route>
                     <Route path="/login">
                             <Login
