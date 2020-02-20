@@ -11,9 +11,20 @@ class App extends React.Component {
     this.state  ={
       result : '',
       query:'',
-      error : ''
+      error : '',
+      user:{
+        admin : false,
+        login : false
+      }
     }
+    const users = [
+      {id: '1', email :'florencia@gmail.com', pass :'123456', admin: true},
+      {id: '2', email :'mauro@gmail.com', pass :'123456', admin:false},
+    ]
+    localStorage.setItem('users', JSON.stringify(users))
   }
+
+  
   
   componentDidUpdate(prevProps, prevState){
     
@@ -22,9 +33,32 @@ class App extends React.Component {
       
     }  
   } 
-  // llamada a la api para las peliculas mas popularesit
-
   
+
+  login=(user)=>{
+    let validation =  JSON.parse(localStorage.getItem('users'));
+    console.log(user);
+
+    const acept = validation.find(element => (user.email === element.email) && (user.password === element.pass));
+    
+    if (acept) {
+      let loginUser ={
+        admin : acept.admin,
+        login : true
+      }
+      this.setState({
+        user : loginUser
+      })
+      
+      alert('te logeaste')
+    }else{
+      alert('Email o contraseña inválido')
+    }
+    
+    
+    
+
+  }
 
   callApi = ()=>{
     const keyApi= 'ce62b7f668a97b07e6d58a85df75641b';
@@ -37,7 +71,7 @@ class App extends React.Component {
         return response.json()
       })
       .then(data=>{
-        localStorage.setItem('populares', JSON.stringify(data));
+        localStorage.setItem('populares', JSON.stringify(data.results));
       })
       .catch(error=>{
         console.log(error);
@@ -70,14 +104,13 @@ class App extends React.Component {
   }
 
 
-  // JSON.parse(localStorage.getItem('user'))
-
  render(){
    for (let i = 0; i < 1; i++) {   
     this.callApi()
    }
   return (
     <Header 
+      login = {this.login}
       //moviesPopulares = JSON.parse(localStorage.getItem('populares'))
     />
   );
