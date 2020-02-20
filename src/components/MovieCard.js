@@ -4,10 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 export default class MovieCard extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
 
     render(){
         let url= "https://image.tmdb.org/t/p/w500";
