@@ -12,12 +12,23 @@ import {
     Link,
     NavLink
   } from "react-router-dom";
-  import User from '../pages/User.js';
 
 
 export default class Header extends React.Component{
 
+    nameMovie = React.createRef()
+    searchMovie=(e)=>{
+        e.preventDefault();
+        if(this.nameMovie.current.value){
+            this.props.searchForName(this.nameMovie.current.value);
+        }else{
+            alert('Debe insertar un nombre!!')
+        }
+         e.currentTarget.reset();
+    }
+
     render(){
+        
         return(
             <>
             <Router>
@@ -27,9 +38,9 @@ export default class Header extends React.Component{
                                 <NavLink to="/home" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
                                 <NavLink to="/login" style={{ color: 'white', padding: 10 }} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Iniciar sesión</NavLink>
                     </Nav>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Buscar por nombre" className="mr-sm-2" />
-                        <Button variant="outline-warning">Buscar</Button>
+                    <Form inline onSubmit={this.searchMovie} >
+                        <FormControl ref={this.nameMovie} type="text" placeholder="Buscar por nombre" className="mr-sm-2" />
+                        <Button type="submit" variant="outline-warning">Buscar</Button>
                     </Form>
                 </Navbar>
                 <Switch>
