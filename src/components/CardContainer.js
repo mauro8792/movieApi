@@ -10,7 +10,7 @@ export default class CardContainer extends React.Component{
         return(
             <>
                         <Filters style={{padding: 50}}/>
-                        <CardDeck style={{"padding-left": 50, "padding-top": 20}}>
+                        <CardDeck style={{"paddingLeft": 50, "paddingTop": 20}}>
                             {movies && movies.map((movie, key)=>(
                             <MovieCard movie={ movie } key={key} />
                             ))}

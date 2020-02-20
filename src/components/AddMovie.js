@@ -6,8 +6,8 @@ export default class addMovie extends React.Component{
     render(){
         return(
             <>
-                <h2 style={{"padding-top":70 ,"padding-left":200}}>Subir nueva película</h2>
-                <Form style={{"padding-left":20}}>
+                <h2 style={{"paddingTop":70 ,"paddingLeft":200}}>Subir nueva película</h2>
+                <Form style={{"paddingLeft":20}}>
                     <Form.Group>
                         <Form.Label>Titulo</Form.Label>
                         <Form.Control type="text" placeholder="Título de la película" id="title"/>

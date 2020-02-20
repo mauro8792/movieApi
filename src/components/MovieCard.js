@@ -12,7 +12,7 @@ export default class MovieCard extends React.Component{
         return (
             <>
                     <Row>
-                        <Col sm-3>
+                        <Col sm-3="true">
                             <Card style={{ width: '18rem' }} className="bg-dark text-white">
                             <Card.Img src={url + movie.poster_path} style={{width: 300, heigth: 300}} alt="Card image" />
                             <Card.ImgOverlay>
