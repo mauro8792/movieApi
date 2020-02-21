@@ -1,17 +1,18 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import {
+    Redirect,
+  } from "react-router-dom";
 
 export default class Login extends React.Component{
 
     email = React.createRef();
     password= React.createRef()
     
-    
+   
     login=(e)=>{
         e.preventDefault();
-        console.log('email',this.email.current.value);
-        console.log('pass',this.password.current.value);
         if (this.email.current.value && this.password.current.value) {
             const user = {
                 email : this.email.current.value,
@@ -25,6 +26,8 @@ export default class Login extends React.Component{
 
 
     render(){
+        if ( this.props.user.login)
+            return <Redirect to={'/'} />
         return (
             <Form onSubmit={this.login} style={{padding: 80}}>
             <Form.Group>
