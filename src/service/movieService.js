@@ -17,6 +17,8 @@ const getPopularMovie = async () =>{
 
 }
 
+
+
 const nowPlayingMovies = async () =>{
     const urlApiNowPlaying= `https://api.themoviedb.org/3/movie/now_playing?api_key=${keyApi}&page=${page}&region=${region}`;
     const response = await fetch(urlApiNowPlaying);

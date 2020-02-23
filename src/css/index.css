@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.card-deck .card {
+  
+  min-width: 380px;
+  max-width: 270px;
+  
+}
+#sticky-footer {
+  flex-shrink: none;
+}
