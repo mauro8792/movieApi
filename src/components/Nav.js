@@ -33,7 +33,7 @@ export default class Header extends React.Component{
                             {/* <NavLink to="/home" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink> */}
                             {/* <NavLink to="/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink> */}
                             <NavDropdown title="Categorias" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Accion</NavDropdown.Item>
+                                <NavDropdown.Item   onClick={this.props.actionMov } to='/movies/acction'>Accion</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Romance</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">Animacion</NavDropdown.Item>
                                 <NavDropdown.Divider />
@@ -53,6 +53,7 @@ export default class Header extends React.Component{
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown> 
                             <NavLink to="/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
+                            <NavLink to="/movies/create" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
                             
                         </Nav> 
                 navLogin =  <Nav>

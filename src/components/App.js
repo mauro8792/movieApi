@@ -4,11 +4,15 @@ import userService from '../service/userService';
 import movieService from '../service/movieService';
 import Nav from './Nav';
 import Login from "./Login.js";
+import Movie from './Movie'
 import CardContainer from "../components/CardContainer.js";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+} from "react-router-dom";
+import {
+  Redirect,
 } from "react-router-dom";
 
 
@@ -109,6 +113,22 @@ class App extends React.Component {
 
     })
   }
+
+  addMovie = (movie)=>{
+    console.log(movie);
+    let movies = []
+    movies= JSON.parse( localStorage.getItem('populares'));
+    movies.push(movie);
+    localStorage.setItem('populares', JSON.stringify( movies))
+    console.log(movies);
+    this.setState({
+      result : movies
+    })
+    /* return <Redirect to={'/'} />  */
+    
+    
+  }
+  
  render(){
        
     return (
@@ -121,8 +141,8 @@ class App extends React.Component {
                     <Route exact path='/' >
                         <CardContainer movies={this.state.result}/>
                     </Route>
-                    <Route exact path="/movies" >    
-                                  
+                    <Route exact path="/movies/create" >    
+                      <Movie addMovie = {this.addMovie}/> 
                        
                     </Route>
                     

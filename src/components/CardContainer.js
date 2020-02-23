@@ -21,7 +21,7 @@ export default class CardContainer extends React.Component{
         return(
             <>
                 {/* <Filters style={{padding: 50}}/>  */}
-                <CardDeck style={{"paddingLeft": 50, "paddingTop": 20, 'marginTop': '5%'}}>
+                <CardDeck style={{"paddingLeft": '10%', "paddingTop": 20, 'marginTop': '5%'}}>
                     {this.props.movies && this.props.movies.map((movie, key)=>(
                     <MovieCard movie={ movie } key={key} />
                     ))}
