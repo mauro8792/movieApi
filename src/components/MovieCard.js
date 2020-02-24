@@ -11,8 +11,8 @@ export default class MovieCard extends React.Component{
         let url= "https://image.tmdb.org/t/p/w500";
         const {movie}= this.props;
         let imagen;
-        if (movie.poster_path || movie.backdrop_path) {
-             imagen = url+( movie.poster_path ? movie.poster_path : movie.backdrop_path)
+        if (movie.image) {
+             imagen = url+movie.image
         }else{
             imagen = opcional
         }

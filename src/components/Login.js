@@ -29,7 +29,7 @@ export default class Login extends React.Component{
         if ( this.props.user.login)
             return <Redirect to={'/'} />
         return (
-            <Form onSubmit={this.login} style={{padding: 80}}>
+            <Form onSubmit={this.login} style={{padding: 80, marginTop:'5%'}}>
             <Form.Group>
                 <Form.Label>Mail</Form.Label>
                 <Form.Control ref={this.email} type="email" placeholder="Ingrese su email" id="email"/>
