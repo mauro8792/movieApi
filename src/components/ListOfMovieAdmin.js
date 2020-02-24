@@ -8,9 +8,7 @@ import {
 export default class ListOfMovieAdmin extends React.Component{
 
     
-    render(){
-        console.log(this.props.user.login);
-        
+    render(){        
         if (!this.props.user.login){
             return <Redirect to={'/login'} />
         }

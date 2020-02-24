@@ -20,7 +20,7 @@ export default class TrTableAdmin extends React.Component{
                 <th scope="row">1 </th>
                 <td>{movie.title}</td>
                 <td>{movie.description}</td>
-                <td><img src={url +movie.image} width='150'/></td>
+                <td><img src={movie.title_original ? url +movie.image : movie.poster_path} width='150'/></td>
                 <td>
                     
                     <form onSubmit={this.movieRemove}>

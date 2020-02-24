@@ -22,7 +22,7 @@ export default class MovieCard extends React.Component{
                     <Row>
                         <Col sm-3="true" >
                             <Card style={{ width: '18rem', marginBottom: 15 }} className="bg-dark text-white">
-                                <Card.Img src={imagen } style={{width: '100%'}} alt="Card image" />
+                                <Card.Img src={movie.title_original ? url +movie.image : movie.poster_path} style={{width: '100%'}} alt="Card image" />
                                 <Card.ImgOverlay>
                                 <Card.Title style={{"color": "yellow"}}>{movie.title}</Card.Title>
                                 <Button variant="outline-warning">★</Button>
