@@ -52,8 +52,8 @@ export default class Header extends React.Component{
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown> 
-                            <NavLink to="/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
-                            <NavLink to="/movies/create" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
+                            <NavLink to="/admin/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
+                            <NavLink to="/admin" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
                             
                         </Nav> 
                 navLogin =  <Nav>
@@ -65,7 +65,7 @@ export default class Header extends React.Component{
         return(
             <>
                 <Navbar bg="dark" variant="dark" fixed="top" collapseOnSelect expand="lg">
-                    <Button onClick={this.props.inicio } variant="outline-warning" to="/"><Navbar.Brand>MovieApp</Navbar.Brand></Button>
+                <NavLink to="/" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Nav className="mr-auto">
                         {nav}

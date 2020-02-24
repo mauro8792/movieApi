@@ -32,6 +32,12 @@ const upComingMovies = async () =>{
     const data = await response.json();
     return data;
 } 
+const getMovieForId = async (id)=>{    
+    const urlFindId= `https://api.themoviedb.org/3/movie/${id}?api_key=ce62b7f668a97b07e6d58a85df75641b&language=es-ES`
+    const response = await fetch(urlFindId);
+    const data =await response.json();
+    return data;
+}
 
 const getMovieForNme = async (nameMovie)=>{
     const urlApiUpComing= `https://api.themoviedb.org/3/search/movie?api_key=${keyApi}&query=${nameMovie}&page=${page}&region=${region}&include_adult=false`;
@@ -41,5 +47,5 @@ const getMovieForNme = async (nameMovie)=>{
 }
 
 export default {
-    popularMovie, getPopularMovie,nowPlayingMovies, upComingMovies, getMovieForNme
+    popularMovie, getPopularMovie,nowPlayingMovies, upComingMovies, getMovieForNme, getMovieForId
 } 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Container, Col } from 'react-bootstrap';
+import {  Container } from 'react-bootstrap';
 import {
     Redirect,
   } from "react-router-dom";
@@ -32,8 +32,7 @@ export default class Movie extends React.Component{
 
 
     render(){
-       if ( this.state.added )
-            return <Redirect to={'/'} />
+       
         return (
         
             <Container style={{"paddingLeft": 50, "paddingTop": 20, 'marginTop': '5%'}}>

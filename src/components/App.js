@@ -5,7 +5,9 @@ import movieService from '../service/movieService';
 import Nav from './Nav';
 import Login from "./Login.js";
 import Movie from './Movie'
+import Admin from '../pages/Admin'
 import CardContainer from "../components/CardContainer.js";
+import ListOfMovieAdmin from './ListOfMovieAdmin'
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,7 +23,7 @@ class App extends React.Component {
     super();
     this.state  ={
       result : [],
-      query:'',
+      forClient:[],
       error : '',
       user:{
         admin : false,
@@ -77,8 +79,10 @@ class App extends React.Component {
   callApi = ()=>{
     movieService.popularMovie().then(data=>{
       localStorage.setItem('populares', JSON.stringify(data.results))
+      let forClient= JSON.parse(localStorage.getItem('movieForClient'));   
       this.setState({
-        result : data.results
+        result : data.results,
+        forClient: forClient
       })
       
     }) 
@@ -93,8 +97,11 @@ class App extends React.Component {
   inicio = ()=>{
     movieService.popularMovie().then(data=>{
       localStorage.setItem('populares', JSON.stringify(data.results))
+      let forClient= JSON.parse(localStorage.getItem('movieforClient'));
+      
       this.setState({
         result : data.results,
+        forClient: forClient,
         search :false
       })
     }) 
@@ -115,18 +122,49 @@ class App extends React.Component {
   }
 
   addMovie = (movie)=>{
-    console.log(movie);
-    let movies = []
-    movies= JSON.parse( localStorage.getItem('populares'));
-    movies.push(movie);
-    localStorage.setItem('populares', JSON.stringify( movies))
-    console.log(movies);
+    //console.log(movie);
+    let forclient = []
+    forclient  = JSON.parse(localStorage.getItem('movieForClient'));
+    console.log(forclient);
+    
+    if (forclient===null) {
+      let movies = [];
+      movies.push(movie);
+      localStorage.setItem('movieForClient', JSON.stringify( movies))
+    } else{
+      
+      forclient.push(movie);
+      localStorage.setItem('movieForClient', JSON.stringify( forclient))
+    }   
+    //console.log(movies);
     this.setState({
-      result : movies
-    })
+      forClient : forclient
+    }) 
     /* return <Redirect to={'/'} />  */
+  }
+  
+  removeMovie=(id)=>{
+    let movies = JSON.parse(localStorage.getItem('movieForClient'))
+    
+    movies.forEach(movie => {
+      if(movie.id==id){
+        console.log(movie);
+        this.removeItemFromArr(movies, movie)
+      }
+    });
+    console.log(movies);
+    
+    localStorage.setItem('movieForClient',JSON.stringify( movies))
+    this.setState({
+      forClient : movies
+    })
     
     
+  }
+
+  removeItemFromArr ( arr, item ) {
+    var i = arr.indexOf( item );
+    arr.splice( i, 1 );
   }
   
  render(){
@@ -139,11 +177,13 @@ class App extends React.Component {
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer movies={this.state.result}/>
+                        <CardContainer movies={this.state.forClient}/> 
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
-                       
+                    </Route>
+                    <Route exact path="/admin/movies/" >    
+                      <ListOfMovieAdmin user={this.state.user} movies={this.state.forClient} addMovie={this.addMovie} removeMovie={this.removeMovie} />
                     </Route>
                     
                     <Route exact path="/login">
@@ -155,6 +195,10 @@ class App extends React.Component {
                     <Route exact path="/logout" >
                      
                        
+                    </Route>
+                    <Route exact path="/admin" >
+                        <Admin user={this.state.user} movies={this.state.result} addMovie={this.addMovie} />
+
                     </Route>
                 </Switch>
             </Router>
