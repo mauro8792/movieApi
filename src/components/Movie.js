@@ -14,15 +14,20 @@ export default class Movie extends React.Component{
     image= React.createRef()
     description = React.createRef()
     
+    getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+      }
    
     add=(e)=>{
         e.preventDefault();
+        let id = this.getRandomArbitrary(0,999999);
         if (this.titulo.current.value && this.image.current.value) {
             const movie = {
+                id :id,
                 title : this.titulo.current.value,
                 description : this.description.current.value,
                 poster_path : this.image.current.value
-            }
+            }            
             this.props.addMovie(movie);
             this.setState({
                 added : true

@@ -13,9 +13,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import {
-  Redirect,
-} from "react-router-dom";
+
 
 
 class App extends React.Component {
@@ -120,6 +118,21 @@ class App extends React.Component {
 
     })
   }
+  searchForNameLocal = (name) =>{
+    console.log('name', name);
+    
+    let movies = JSON.parse(localStorage.getItem('movieForClient'));
+    let resultado = movies.find(movie => movie.title==name);
+    /* this.setState({
+      search : true,
+      forClient:resultado
+    }) */
+    console.log('buscado',resultado);
+    
+    
+
+    
+  }
 
   addMovie = (movie)=>{
     //console.log(movie);
@@ -173,7 +186,7 @@ class App extends React.Component {
         <>
 
           <Router>
-            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForName={this.searchForName} />
+            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} />
 
                 <Switch>
                     <Route exact path='/' >
@@ -183,7 +196,7 @@ class App extends React.Component {
                       <Movie addMovie = {this.addMovie}/> 
                     </Route>
                     <Route exact path="/admin/movies/" >    
-                      <ListOfMovieAdmin user={this.state.user} movies={this.state.forClient} addMovie={this.addMovie} removeMovie={this.removeMovie} />
+                      <ListOfMovieAdmin  user={this.state.user} movies={this.state.forClient} addMovie={this.addMovie} removeMovie={this.removeMovie} />
                     </Route>
                     
                     <Route exact path="/login">
@@ -197,7 +210,7 @@ class App extends React.Component {
                        
                     </Route>
                     <Route exact path="/admin" >
-                        <Admin user={this.state.user} movies={this.state.result} addMovie={this.addMovie} />
+                        <Admin searchForName={this.searchForName} user={this.state.user} movies={this.state.result} addMovie={this.addMovie} />
 
                     </Route>
                 </Switch>

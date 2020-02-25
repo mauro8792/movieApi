@@ -14,7 +14,6 @@ export default class ListOfMovieAdmin extends React.Component{
         }
         return(
             <>
-            {/* <Header user={this.props.user} login={this.props.login}/> */}
             <div className='container' >
                 <Movie addMovie={this.props.addMovie}/>
             </div>
@@ -23,11 +22,10 @@ export default class ListOfMovieAdmin extends React.Component{
                 <caption>lista de películas</caption>
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Título</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Imagen</th>
-                        <th scope="col"> Agregar</th>
+                        <th scope="col"> Quitar</th>
                         </tr>
                     </thead>
                     <tbody>

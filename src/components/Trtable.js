@@ -33,7 +33,6 @@ export default class Trtable extends React.Component{
         return (
             <>
             <tr>
-                <th scope="row">1 </th>
                 <td>{movie.title}</td>
                 <td>{movie.overview.length>250 ? movie.overview.substr(0,250) : movie.overview }</td>
                 <td><img src={url +movie.backdrop_path} width='150'/></td>

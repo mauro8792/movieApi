@@ -40,7 +40,7 @@ const getMovieForId = async (id)=>{
 }
 
 const getMovieForNme = async (nameMovie)=>{
-    const urlApiUpComing= `https://api.themoviedb.org/3/search/movie?api_key=${keyApi}&query=${nameMovie}&page=${page}&region=${region}&include_adult=false`;
+    const urlApiUpComing= `https://api.themoviedb.org/3/search/movie?api_key=${keyApi}&query=${nameMovie}&page=${page}&region=${region}&include_adult=false&language=es-ES`;
     const response = await fetch(urlApiUpComing);
     const data =await response.json();
     return data.results;

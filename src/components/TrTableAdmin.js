@@ -1,5 +1,4 @@
 import React from "react";
-import MovieService from '../service/movieService'
 export default class TrTableAdmin extends React.Component{
 
     idMovie =  React.createRef();
@@ -17,7 +16,6 @@ export default class TrTableAdmin extends React.Component{
         return (
             <>
             <tr>
-                <th scope="row">1 </th>
                 <td>{movie.title}</td>
                 <td>{movie.description}</td>
                 <td><img src={movie.title_original ? url +movie.image : movie.poster_path} width='150'/></td>

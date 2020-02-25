@@ -15,7 +15,7 @@ export default class Header extends React.Component{
     searchMovie=(e)=>{
         e.preventDefault();
         if(this.nameMovie.current.value){
-            this.props.searchForName(this.nameMovie.current.value);
+            this.props.searchForNameLocal(this.nameMovie.current.value);
             
         }else{
             alert('Debe insertar un nombre!!')
