@@ -1,11 +1,21 @@
-import AddMovie from "../components/AddMovie.js";
 import React from "react";
 import Trtable from '../components/Trtable.js';
 import {
     Redirect,
   } from "react-router-dom";
 export default class Admin extends React.Component{
-
+    
+    nameMovie = React.createRef()
+    searchMovie=(e)=>{
+        e.preventDefault();
+        if(this.nameMovie.current.value){
+            this.props.searchForName(this.nameMovie.current.value);
+            
+        }else{
+            alert('Debe insertar un nombre!!')
+        }
+         e.currentTarget.reset();
+    }
     
     render(){
         
@@ -15,14 +25,21 @@ export default class Admin extends React.Component{
         
         return(
             <>
-            {/* <Header user={this.props.user} login={this.props.login}/> */}
-            
             <div className='container'style={{marginTop:'10%'}}>
-                <table className="table table-responsive">
-                <caption>lista de películas</caption>
+                <form onSubmit={this.searchMovie}>
+                    <div className="row">
+                        <div className="col-9">
+                        <input type="text" ref={this.nameMovie} className="form-control" placeholder="Nombre del Título"/>
+                        </div>
+                        <div className="col-3">
+                        <button type="submit" className="btn btn-secondary">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+                <table className="table table-responsive" style={{marginTop:'5%'}}>
+                <caption>Lista de películas</caption>
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Título</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Imagen</th>
