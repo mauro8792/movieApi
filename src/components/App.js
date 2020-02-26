@@ -220,10 +220,10 @@ class App extends React.Component {
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
+                        <CardContainer user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
                     </Route>
                     <Route exact path='/favs' >
-                        <CardContainer movies={this.state.clientFavs}/>
+                        <CardContainer movies={this.state.clientFavs} />
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
