@@ -97,18 +97,11 @@ class App extends React.Component {
     
   }
   inicio = ()=>{
-    movieService.popularMovie().then(data=>{
-      localStorage.setItem('populares', JSON.stringify(data.results))
-      let forClient= JSON.parse(localStorage.getItem('movieforClient'));
-      
+      let forClient= JSON.parse(localStorage.getItem('movieForClient'));      
       this.setState({
-        result : data.results,
         forClient: forClient,
         search :false
       })
-    }) 
-    
-    console.log(this.state.result);
   }
 
   searchForName = (name) =>{
@@ -124,7 +117,6 @@ class App extends React.Component {
   }
   searchForNameLocal = (name) =>{
     let nameMayus = name.toUpperCase()
-    console.log('name', nameMayus);
     let movies = JSON.parse(localStorage.getItem('movieForClient'));
     let resultado = movies.find(movie => 
       movie.title.toUpperCase().indexOf(nameMayus) ==! -1 );
@@ -133,12 +125,7 @@ class App extends React.Component {
     this.setState({
        search : true,
        forClient: buscado
-    })
-    console.log('buscado',buscado);
-    
-    
-
-    
+    })  
   }
 
   addFavMovie= (id)=>{

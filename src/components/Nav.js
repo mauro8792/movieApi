@@ -66,7 +66,7 @@ export default class Header extends React.Component{
         return(
             <>
                 <Navbar bg="dark" variant="dark" fixed="top" collapseOnSelect expand="lg">
-                <NavLink to="/" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
+                <NavLink to="/" onClick={this.props.inicio} style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Nav className="mr-auto">
                         {nav}
