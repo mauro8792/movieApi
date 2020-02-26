@@ -91,8 +91,8 @@ class App extends React.Component {
   }
   
 
-  callApi = ()=>{
-    movieService.popularMovie().then(data=>{
+  callApi = (pageP)=>{
+    movieService.popularMovie(pageP).then(data=>{
       localStorage.setItem('populares', JSON.stringify(data.results))
       let forClient= JSON.parse(localStorage.getItem('movieForClient'));   
       this.setState({
@@ -251,7 +251,7 @@ class App extends React.Component {
                        
                     </Route>
                     <Route exact path="/admin" >
-                        <Admin searchForName={this.searchForName} user={this.state.user} movies={this.state.result} addMovie={this.addMovie} />
+                        <Admin callApi={this.callApi} searchForName={this.searchForName} user={this.state.user} movies={this.state.result} addMovie={this.addMovie} />
 
                     </Route>
                 </Switch>

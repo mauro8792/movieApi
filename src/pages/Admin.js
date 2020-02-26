@@ -1,6 +1,7 @@
 import React from "react";
 import Trtable from '../components/Trtable.js';
 import Swal from 'sweetalert2';
+import Pagination from '../components/Pagination'
 
 import {
     Redirect,
@@ -61,6 +62,9 @@ export default class Admin extends React.Component{
                     
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation example" >
+                    <Pagination callApi={this.props.callApi} />
+                </nav>
             </div>
             </>
         )
