@@ -13,6 +13,9 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import {
+  Redirect,
+} from "react-router-dom";
 
 
 
@@ -120,15 +123,18 @@ class App extends React.Component {
     })
   }
   searchForNameLocal = (name) =>{
-    console.log('name', name);
-    
+    let nameMayus = name.toUpperCase()
+    console.log('name', nameMayus);
     let movies = JSON.parse(localStorage.getItem('movieForClient'));
-    let resultado = movies.find(movie => movie.title==name);
-    /* this.setState({
-      search : true,
-      forClient:resultado
-    }) */
-    console.log('buscado',resultado);
+    let resultado = movies.find(movie => 
+      movie.title.toUpperCase().indexOf(nameMayus) ==! -1 );
+    let buscado= [];
+    buscado.push(resultado)
+    this.setState({
+       search : true,
+       forClient: buscado
+    })
+    console.log('buscado',buscado);
     
     
 
@@ -201,6 +207,7 @@ class App extends React.Component {
     this.setState({
       forClient : movies
     })
+      return <Redirect to={'/'} />
     
     
   }

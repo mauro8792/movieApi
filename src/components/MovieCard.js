@@ -16,6 +16,7 @@ export default class MovieCard extends React.Component{
     }
 
     render(){
+        console.log(this.props.user);
         let url= "https://image.tmdb.org/t/p/w500";
 
         const {movie}= this.props;

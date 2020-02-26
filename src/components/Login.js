@@ -29,19 +29,25 @@ export default class Login extends React.Component{
         if ( this.props.user.login)
             return <Redirect to={'/'} />
         return (
-            <Form onSubmit={this.login} style={{padding: 80, marginTop:'5%'}}>
-            <Form.Group>
-                <Form.Label>Mail</Form.Label>
-                <Form.Control ref={this.email} type="email" placeholder="Ingrese su email" id="email"/>
-            </Form.Group>
+            <div className='container' >
+                <Form onSubmit={this.login} style={{padding: 80, marginTop:'5%'}}>
+                <div className="row">
+                    <div className="col-6">
+                        <Form.Group>
+                            <Form.Label>Mail</Form.Label>
+                            <Form.Control ref={this.email} type="email" placeholder="Ingrese su email" id="email"/>
+                        </Form.Group>
 
-            <Form.Group>
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control ref={this.password} type="password" placeholder="Ingrese su contraseña" id="password"/>
-                <Form.Text className="text-muted">Nunca compartiremos tu contraseña con nadie más.</Form.Text>
-            </Form.Group>
-            <Button variant="success" type="submit">Iniciar sesión</Button>
-            </Form>
+                        <Form.Group>
+                            <Form.Label>Contraseña</Form.Label>
+                            <Form.Control ref={this.password} type="password" placeholder="Ingrese su contraseña" id="password"/>
+                            <Form.Text className="text-muted">Nunca compartiremos tu contraseña con nadie más.</Form.Text>
+                        </Form.Group>
+                    </div>
+                </div>
+                <Button variant="success" type="submit">Iniciar sesión</Button>
+                </Form>
+            </div>
         );
     }
 }
