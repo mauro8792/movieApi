@@ -1,11 +1,13 @@
 import React from "react";
 import MovieService from '../service/movieService'
+import Swal from 'sweetalert2';
 export default class Trtable extends React.Component{
 
     idMovie =  React.createRef();
     
     movieAdd=(e)=>{
         e.preventDefault();
+        const Swal = require('sweetalert2');
        MovieService.getMovieForId(this.idMovie.current.value).then(data=>{
            let movie = {
                id : data.id,
@@ -17,6 +19,12 @@ export default class Trtable extends React.Component{
           // console.log(movie);
            
            this.props.addMovie(movie);
+           Swal.fire({
+            title: 'Éxito!',
+            text: 'Película añadida a la lista',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
+          })
 
         //localStorage.setItem('movieForClient', JSON.stringify(movie));
             

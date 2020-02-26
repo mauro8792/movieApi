@@ -5,14 +5,22 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import opcional from '../img/default.gif'
 import MovieService from "../service/movieService.js";
+import Swal from 'sweetalert2';
 
 export default class MovieCard extends React.Component{
-
+    
     idMovie= React.createRef();
-
+    
     addFav= (e)=>{
+        const Swal = require('sweetalert2');
         e.preventDefault();
         this.props.addFavMovie(this.idMovie.current.value);
+        Swal.fire({
+            title: 'Éxito!',
+            text: 'Película añadida a favoritos',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
+          })
     }
 
     render(){

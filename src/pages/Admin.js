@@ -1,5 +1,7 @@
 import React from "react";
 import Trtable from '../components/Trtable.js';
+import Swal from 'sweetalert2';
+
 import {
     Redirect,
   } from "react-router-dom";
@@ -8,11 +10,17 @@ export default class Admin extends React.Component{
     nameMovie = React.createRef()
     searchMovie=(e)=>{
         e.preventDefault();
+        const Swal= require('sweetalert2');
         if(this.nameMovie.current.value){
             this.props.searchForName(this.nameMovie.current.value);
             
         }else{
-            alert('Debe insertar un nombre!!')
+            Swal.fire({
+                title: 'Error!',
+                text: 'Debe insertar un nombre',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+              })
         }
          e.currentTarget.reset();
     }

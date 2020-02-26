@@ -8,6 +8,7 @@ import Movie from './Movie'
 import Admin from '../pages/Admin'
 import CardContainer from "../components/CardContainer.js";
 import ListOfMovieAdmin from './ListOfMovieAdmin';
+import Swal from 'sweetalert2';
 import {
   BrowserRouter as Router,
   Switch,
@@ -60,6 +61,7 @@ class App extends React.Component {
   }
 
   login=(user)=>{
+    const Swal= require('sweetalert2');
     userService.loginService(user)
       .then( acept =>{
         if (acept) {
@@ -69,10 +71,21 @@ class App extends React.Component {
           }
           this.setState({
             user : loginUser
+          });
+          Swal.fire({
+            title: 'Éxito!',
+            text: 'Inicio de sesión correcto',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
           })
           
         }else{
-          alert('Email o contraseña inválido')
+          Swal.fire({
+            title: 'Error!',
+            text: 'Email o contraseña inválido',
+            icon: 'error',
+            confirmButtonText: 'Continuar'
+          })
         }
       })
   }
@@ -189,6 +202,7 @@ class App extends React.Component {
     this.setState({
       forClient : forclient
     }) 
+
     /* return <Redirect to={'/'} />  */
   }
   

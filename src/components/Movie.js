@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import {  Container } from 'react-bootstrap';
 
 export default class Movie extends React.Component{
@@ -18,6 +19,7 @@ export default class Movie extends React.Component{
     add=(e)=>{
         e.preventDefault();
         let id = this.getRandomArbitrary(0,999999);
+        const Swal= require('sweetalert2');
         if (this.titulo.current.value && this.image.current.value) {
             const movie = {
                 id :id,
@@ -26,6 +28,12 @@ export default class Movie extends React.Component{
                 poster_path : this.image.current.value
             }            
             this.props.addMovie(movie);
+            Swal.fire({
+                title: 'Éxito!',
+                text: 'Película añadida a la lista',
+                icon: 'success',
+                confirmButtonText: 'Continuar'
+              })
             this.setState({
                 added : true
             })
