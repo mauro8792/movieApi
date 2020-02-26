@@ -48,13 +48,12 @@ export default class MovieCard extends React.Component{
                     <Row>
                         <Col sm-3="true" >
                             <Card style={{ width: '18rem', marginBottom: 15 }} className="bg-dark text-white">
+                                <Card.Title style={{"color": "#ffbb33", "padding":14}}>{movie.title}</Card.Title>
                                 <Card.Img src={movie.title_original ? url +movie.image : movie.poster_path} style={{width: '100%'}} alt="Card image" />
                                 <Card.ImgOverlay>
-                                <Card.Title style={{"color": "yellow"}}>{movie.title}</Card.Title>
+                                <Button variant="outline-light" type="submit" className="float-right">Ver más</Button>
                                 {fav}
                                 </Card.ImgOverlay>
-                                <Card.Footer className="text-muted" style={{textAlign:'center'}}>
-                                </Card.Footer>
                             </Card>
                         </Col>
                     </Row>
