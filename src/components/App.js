@@ -7,7 +7,8 @@ import Login from "./Login.js";
 import Movie from './Movie'
 import Admin from '../pages/Admin'
 import CardContainer from "../components/CardContainer.js";
-import ListOfMovieAdmin from './ListOfMovieAdmin'
+import ListOfMovieAdmin from './ListOfMovieAdmin';
+import FavList from './FavList.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,6 +23,7 @@ class App extends React.Component {
     this.state  ={
       result : [],
       forClient:[],
+      clientFavs:[],
       error : '',
       user:{
         admin : false,
@@ -134,6 +136,25 @@ class App extends React.Component {
     
   }
 
+  addFavMovie= (movie)=>{
+    let clientfavs=[];
+    clientfavs= JSON.parse(localStorage.getItem('clientFavs'));
+    console.log(clientfavs);
+    
+    if(clientfavs===null){
+      let movies=[];
+      movies.push(movie);
+      localStorage.setItem("clientFavs", JSON.stringify(movies))
+    }
+    else{
+      clientfavs.push(movie);
+      localStorage.setItem("clientFavs", JSON.stringify(clientfavs));
+    }
+    this.setState({
+      clientFavs: clientfavs
+    })
+  }
+
   addMovie = (movie)=>{
     //console.log(movie);
     let forclient = []
@@ -190,7 +211,8 @@ class App extends React.Component {
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer movies={this.state.forClient}/> 
+                        <FavList movies={this.state.clientFavs}/>
+                        <CardContainer movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
