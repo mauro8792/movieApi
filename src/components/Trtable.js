@@ -35,7 +35,7 @@ export default class Trtable extends React.Component{
             <tr>
                 <td>{movie.title}</td>
                 <td>{movie.overview.length>250 ? movie.overview.substr(0,250) : movie.overview }</td>
-                <td><img src={url +movie.backdrop_path} width='150'/></td>
+                <td><img src={url +movie.backdrop_path} width='150' alt={movie.title}/></td>
                 <td>
                     <form onSubmit={this.movieAdd}>
                     <input type="hidden" ref={this.idMovie} value={movie.id}/>
