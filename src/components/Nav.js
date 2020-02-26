@@ -38,7 +38,8 @@ export default class Header extends React.Component{
                                 <NavDropdown.Item href="#action/3.3">Animacion</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>   
+                            </NavDropdown>
+                            <NavLink to="/favs" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de favoritos</NavLink>   
                         </Nav>
                 navLogin =  <Nav>
                                 <Button onClick={this.props.logout } style={{ color: 'white', padding: 10 }}variant="outline-warning">Cerrar </Button>
