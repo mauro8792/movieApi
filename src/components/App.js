@@ -7,7 +7,7 @@ import Login from "./Login.js";
 import Movie from './Movie'
 import Admin from '../pages/Admin'
 import CardContainer from "../components/CardContainer.js";
-import ListOfMovieAdmin from './ListOfMovieAdmin'
+import ListOfMovieAdmin from './ListOfMovieAdmin';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +25,7 @@ class App extends React.Component {
     this.state  ={
       result : [],
       forClient:[],
+      clientFavs:[],
       error : '',
       user:{
         admin : false,
@@ -140,6 +141,35 @@ class App extends React.Component {
     
   }
 
+  addFavMovie= (id)=>{
+    let clientfavs=[];
+    clientfavs= JSON.parse(localStorage.getItem('clientFavs'));
+    let forclient = []
+    forclient  = JSON.parse(localStorage.getItem('movieForClient'));
+    console.log(clientfavs);
+
+    forclient.forEach(movie => {
+      if(movie.id==id){
+        console.log(movie);
+        if(clientfavs===null){
+          let movies=[];
+          movies.push(movie);
+          localStorage.setItem("clientFavs", JSON.stringify(movies))
+        }
+        else{
+          clientfavs.push(movie);
+          localStorage.setItem("clientFavs", JSON.stringify(clientfavs));
+        }
+        this.setState({
+          clientFavs: JSON.parse(localStorage.getItem('clientFavs'))
+        })
+        
+      }
+    });
+    
+    console.log(id);
+  }
+
   addMovie = (movie)=>{
     //console.log(movie);
     let forclient = []
@@ -197,7 +227,10 @@ class App extends React.Component {
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer user={this.state.user} movies={this.state.forClient}/> 
+                        <CardContainer user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
+                    </Route>
+                    <Route exact path='/favs' >
+                        <CardContainer user={this.state.user} movies={this.state.clientFavs} />
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
