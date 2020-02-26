@@ -107,6 +107,11 @@ class App extends React.Component {
     movieService.nowPlayingMovies().then(data=>{
       localStorage.setItem('nowPlayin', JSON.stringify(data.results))
     })
+    movieService.getGenres().then(data=>{
+      console.log(data);
+      
+      localStorage.setItem('genres', JSON.stringify(data))
+    })
     
   }
   inicio = ()=>{
@@ -171,7 +176,7 @@ class App extends React.Component {
   }
 
   addMovie = (movie)=>{
-    //console.log(movie);
+    console.log(movie);
     let forclient = []
     forclient  = JSON.parse(localStorage.getItem('movieForClient'));
     console.log(forclient);
@@ -222,7 +227,6 @@ class App extends React.Component {
        
     return (
         <>
-
           <Router>
             <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} />
 
@@ -256,8 +260,6 @@ class App extends React.Component {
                     </Route>
                 </Switch>
             </Router>
-
-          {/* <CardContainer search={this.state.search} /> */}
         </>
     );
     

@@ -46,6 +46,13 @@ const getMovieForNme = async (nameMovie)=>{
     return data.results;
 }
 
+const getGenres= async ()=>{
+    const urlApiGenres= `https://api.themoviedb.org/3/genre/movie/list?api_key=${keyApi}&language=es-ES`;
+    const response= await fetch(urlApiGenres);
+    const data= await response.json();
+    return data.genres;
+}
+
 export default {
-    popularMovie, getPopularMovie,nowPlayingMovies, upComingMovies, getMovieForNme, getMovieForId
+    popularMovie, getPopularMovie,nowPlayingMovies, upComingMovies, getMovieForNme, getMovieForId, getGenres
 } 

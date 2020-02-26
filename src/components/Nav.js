@@ -32,40 +32,35 @@ export default class Header extends React.Component{
     
     render(){
         let  navLogin, nav ;
+        const categories= JSON.parse(localStorage.getItem('genres'));
         if(!this.props.user.login){
             navLogin = <NavLink to="/login" style={{ color: 'white', padding: 10 }} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Iniciar sesión</NavLink>
         }else{//estas logeado
             if(!this.props.user.admin){                
                 nav =  <Nav>
-                            {/* <NavLink to="/home" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink> */}
-                            {/* <NavLink to="/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink> */}
-                            <NavDropdown title="Categorias" id="collasible-nav-dropdown">
-                                <NavDropdown.Item   onClick={this.props.actionMov } to='/movies/acction'>Accion</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Romance</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Animacion</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
                             <NavLink to="/favs" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de favoritos</NavLink>   
+                            <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
+                                {categories && categories.map((category, key)=>(
+                                <NavDropdown.Item key={key}>{category.name}</NavDropdown.Item> 
+                                ))}
+                            </NavDropdown>
                         </Nav>
                 navLogin =  <Nav>
-                                <Button onClick={this.props.logout } style={{ color: 'white', padding: 10 }}variant="outline-warning">Cerrar </Button>
+                                <Button onClick={this.props.logout } style={{ color: 'white' }}variant="outline-warning">Cerrar </Button>
                             </Nav>
             }else{
                 nav =   <Nav>
-                            <NavDropdown title="Categorias" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Accion</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Romance</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Animacion</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown> 
                             <NavLink to="/admin/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
                             <NavLink to="/admin" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
+                            <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
+                                {categories && categories.map((category, key)=>(
+                                <NavDropdown.Item key={key}>{category.name}</NavDropdown.Item> 
+                                ))}
+                            </NavDropdown>
                             
                         </Nav> 
                 navLogin =  <Nav>
-                                <Button onClick={this.props.logout } style={{ color: 'white', padding: 10 }}variant="outline-warning">Cerrar </Button>
+                                <Button onClick={this.props.logout } style={{ color: 'white'}}variant="outline-warning">Cerrar </Button>
                             </Nav> 
                         
             }
