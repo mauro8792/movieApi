@@ -8,17 +8,24 @@ import {
     NavLink,
   } from "react-router-dom";
 import { NavDropdown } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 export default class Header extends React.Component{
 
     nameMovie = React.createRef()
     searchMovie=(e)=>{
         e.preventDefault();
+        const Swal= require('sweetalert2');
         if(this.nameMovie.current.value){
             this.props.searchForNameLocal(this.nameMovie.current.value);
             
         }else{
-            alert('Debe insertar un nombre!!')
+            Swal.fire({
+                title: 'Error!',
+                text: 'Debe insertar un nombre',
+                icon: 'error',
+                confirmButtonText: 'Continuar'
+              })
         }
          e.currentTarget.reset();
     }
