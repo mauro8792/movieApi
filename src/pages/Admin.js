@@ -32,7 +32,7 @@ export default class Admin extends React.Component{
                         <input type="text" ref={this.nameMovie} className="form-control" placeholder="Nombre del Título"/>
                         </div>
                         <div className="col-3">
-                        <button type="submit" className="btn btn-secondary">Buscar</button>
+                        <button type="submit" className="btn btn-secondary" style={{width:'100%'}}>Buscar</button>
                         </div>
                     </div>
                 </form>
