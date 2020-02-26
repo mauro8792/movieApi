@@ -2,8 +2,13 @@ const keyApi= 'ce62b7f668a97b07e6d58a85df75641b';
 const region = 'AR';
 const page = 1;
 
-const popularMovie = async () =>{
-    const urlApiPopular= `https://api.themoviedb.org/3/movie/popular?api_key=${keyApi}&page=${page}&region=${region}`;
+const popularMovie = async (pageP) =>{
+    let urlApiPopular= ''
+    if(pageP){
+        urlApiPopular= `https://api.themoviedb.org/3/movie/popular?api_key=${keyApi}&page=${pageP}&region=${region}`;
+    }else{
+        urlApiPopular= `https://api.themoviedb.org/3/movie/popular?api_key=${keyApi}&page=${page}&region=${region}`;
+    }
     const response = await fetch(urlApiPopular);
     const data = await response.json();
     return data;
