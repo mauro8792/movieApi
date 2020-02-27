@@ -8,22 +8,15 @@ import MovieService from "../service/movieService.js";
 import {
     NavLink, Link
   } from "react-router-dom";
-import Swal from 'sweetalert2';
 
 export default class MovieCard extends React.Component{
     
     idMovie= React.createRef();
     
     addFav= (e)=>{
-        const Swal = require('sweetalert2');
         e.preventDefault();
         this.props.addFavMovie(this.idMovie.current.value);
-        Swal.fire({
-            title: 'Éxito!',
-            text: 'Película añadida a favoritos',
-            icon: 'success',
-            confirmButtonText: 'Continuar'
-          })
+       
     }
     ver = (id,e)=>{
         e.preventDefault()
@@ -55,7 +48,7 @@ export default class MovieCard extends React.Component{
                         <Col sm-3="true" >
                             <Card style={{ width: '18rem', marginBottom: 15 }} className="bg-dark text-white">
                                 <Card.Title style={{"color": "white", "padding":14}}>{movie.title}</Card.Title>
-                                <Card.Img src={movie.title_original ? url +movie.image : movie.poster_path} style={{width: '100%'}} alt="Card image" />
+                                <Card.Img src={movie.title_original ? url +movie.image : movie.image} style={{width: '100%'}} alt="Card image" />
                                 <Card.ImgOverlay>
                                 <Button variant="outline-light" type="submit" onClick={(e) => this.ver(movie.id, e)} className="float-right"><Link to='/movie/view' >{"Ver Más"}</Link></Button>
                                 {fav}

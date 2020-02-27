@@ -1,5 +1,4 @@
 import React from 'react';
-import Swal from 'sweetalert2';
 import {  Container } from 'react-bootstrap';
 
 export default class Movie extends React.Component{
@@ -25,7 +24,7 @@ export default class Movie extends React.Component{
                 id :id,
                 title : this.titulo.current.value,
                 description : this.description.current.value,
-                poster_path : this.image.current.value
+                image : this.image.current.value
             }            
             this.props.addMovie(movie);
             Swal.fire({

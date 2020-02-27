@@ -12,9 +12,9 @@ export default class DetailMovie extends React.Component{
             <div style={{ backgroundImage : `url(${image_url})`, 'marginTop': '4%' }}>
                <div className='container'>
                    <div className="row" >
-                            <div class="col-8" style={{width: '40%', textAlign: 'center'}}>
+                            <div className="col-8" style={{width: '40%', textAlign: 'center'}}>
                                 <div className="card mb-3" style={{width: '50%'}}>
-                                    <img className="card-img-top" src={url+image} width='10%' alt="Card image cap"/>
+                                    <img className="card-img-top" src={title_original ? url +image : image} width='10%' alt="Card image cap"/>
                                 </div>
                             </div>
                             <div className="col-4">

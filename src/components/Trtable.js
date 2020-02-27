@@ -1,6 +1,5 @@
 import React from "react";
 import MovieService from '../service/movieService'
-import Swal from 'sweetalert2';
 export default class Trtable extends React.Component{
 
     idMovie =  React.createRef();
@@ -18,13 +17,7 @@ export default class Trtable extends React.Component{
                image : data.poster_path, 
                genres: data.genres
            }
-          // console.log(movie);
-           
            this.props.addMovie(movie);
-           
-
-        //localStorage.setItem('movieForClient', JSON.stringify(movie));
-            
        })
        
     

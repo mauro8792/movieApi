@@ -177,30 +177,61 @@ class App extends React.Component {
   }
 
   addFavMovie= (id)=>{
+    const Swal = require('sweetalert2');
     let clientfavs=[];
     clientfavs= JSON.parse(localStorage.getItem('clientFavs'));
     let forclient = []
-    forclient  = JSON.parse(localStorage.getItem('movieForClient'));
-    console.log(clientfavs);
-
-    forclient.forEach(movie => {
-      if(movie.id==id){
-        console.log(movie);
-        if(clientfavs===null){
-          let movies=[];
-          movies.push(movie);
-          localStorage.setItem("clientFavs", JSON.stringify(movies))
-        }
-        else{
-          clientfavs.push(movie);
-          localStorage.setItem("clientFavs", JSON.stringify(clientfavs));
-        }
-        this.setState({
-          clientFavs: JSON.parse(localStorage.getItem('clientFavs'))
-        })
-        
+    let flag = false
+    console.log('clie', clientfavs);
+    
+    if(clientfavs){
+      for (let i = 0; i < clientfavs.length; i++) {
+        if(clientfavs[i].id == id){
+          flag = true;
+          }
       }
-    });
+
+    }else{
+      flag =false
+    }
+    
+    if(!flag){
+      forclient  = JSON.parse(localStorage.getItem('movieForClient'));
+      forclient.forEach(movie => {
+        if(movie.id==id){
+          console.log(movie);
+          if(clientfavs===null){
+            let movies=[];
+            movies.push(movie);
+            localStorage.setItem("clientFavs", JSON.stringify(movies))
+          }
+          else{
+            clientfavs.push(movie);
+            localStorage.setItem("clientFavs", JSON.stringify(clientfavs));
+          }
+          this.setState({
+            clientFavs: JSON.parse(localStorage.getItem('clientFavs'))
+          })
+          Swal.fire({
+            title: 'Éxito!',
+            text: 'Película añadida a favoritos',
+            icon: 'success',
+            confirmButtonText: 'Continuar'
+          })
+          
+        }
+      });
+    }else{
+      Swal.fire({
+        title: 'Error!',
+        text: 'La pelicula ya existe!',
+        icon: 'error',
+        confirmButtonText: 'Volver'
+      })  
+      this.setState({
+        clientFavs: JSON.parse(localStorage.getItem('clientFavs'))
+      })
+    }
     
     console.log(id);
   }
@@ -297,7 +328,7 @@ class App extends React.Component {
    return (
      <>
           <Router>
-              {(this.state.redirect ) ? (<Redirect to={'/'} />) : null }
+            {(this.state.redirect ) ? (<Redirect to={'/'} />) : null }
             <Nav user={this.state.user} search={this.state.search} inicio={this.inicio}
              logout={this.logout} searchForNameLocal={this.searchForNameLocal} filterByCategory={this.filterByCategory} />
 
