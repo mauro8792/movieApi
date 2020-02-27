@@ -21,12 +21,7 @@ export default class Trtable extends React.Component{
           // console.log(movie);
            
            this.props.addMovie(movie);
-           Swal.fire({
-            title: 'Éxito!',
-            text: 'Película añadida a la lista',
-            icon: 'success',
-            confirmButtonText: 'Continuar'
-          })
+           
 
         //localStorage.setItem('movieForClient', JSON.stringify(movie));
             

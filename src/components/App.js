@@ -6,6 +6,7 @@ import Nav from './Nav';
 import Login from "./Login.js";
 import Movie from './Movie'
 import Admin from '../pages/Admin'
+import DetailMovie from './DetailMovie'
 import CardContainer from "../components/CardContainer.js";
 import ListOfMovieAdmin from './ListOfMovieAdmin';
 import Swal from 'sweetalert2';
@@ -27,8 +28,8 @@ class App extends React.Component {
       result : [],
       forClient:[],
       clientFavs:[],
+      viewMore : '',
       filtered: [],
-      error : '',
       user:{
         admin : false,
         login : false
@@ -204,25 +205,48 @@ class App extends React.Component {
     console.log(id);
   }
 
-  addMovie = (movie)=>{
-    console.log(movie);
+  addMovie = (peli)=>{
+    const Swal = require('sweetalert2');
     let forclient = []
+    let flag = false
     forclient  = JSON.parse(localStorage.getItem('movieForClient'));
-    console.log(forclient);
+    for (let i = 0; i < forclient.length; i++) {
+      if(forclient[i].title === peli.title){
+        flag = true;
+      }
+    }
+    if(!flag){
+      if (forclient===null) {
+        let movies = [];
+        movies.push(peli);
+        localStorage.setItem('movieForClient', JSON.stringify( movies))
+      } else{
+        
+        forclient.push(peli);
+        localStorage.setItem('movieForClient', JSON.stringify( forclient))
+      } 
+      Swal.fire({
+        title: 'Éxito!',
+        text: 'Película añadida a la lista',
+        icon: 'success',
+        confirmButtonText: 'Continuar'
+      })  
+      //console.log(movies);
+      this.setState({
+        forClient : forclient
+      }) 
+    }else{
+      Swal.fire({
+        title: 'Error!',
+        text: 'La pelicula ya existe!',
+        icon: 'error',
+        confirmButtonText: 'Volver'
+      })  
+    }
     
-    if (forclient===null) {
-      let movies = [];
-      movies.push(movie);
-      localStorage.setItem('movieForClient', JSON.stringify( movies))
-    } else{
-      
-      forclient.push(movie);
-      localStorage.setItem('movieForClient', JSON.stringify( forclient))
-    }   
-    //console.log(movies);
-    this.setState({
-      forClient : forclient
-    }) 
+
+    
+    
 
     /* return <Redirect to={'/'} />  */
   }
@@ -251,8 +275,21 @@ class App extends React.Component {
     var i = arr.indexOf( item );
     arr.splice( i, 1 );
   }
+
+  viewMore =(id)=>{
+      console.log(id);
+      
+      let movies = JSON.parse(localStorage.getItem('movieForClient'));
+      let movie=[]; 
+      movie.push(movies.find(movie=> movie.id === id));
+       this.setState({
+        viewMore : movies.find(movie=> movie.id === id)
+      }) 
+      return <Redirect to={'/movie/view'} />
+  }
   
  render(){
+
     return (
         <>
           <Router>
@@ -260,7 +297,8 @@ class App extends React.Component {
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie} /> 
+                        <CardContainer viewMore={this.viewMore} user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
+
                     </Route>
                     <Route exact path='/favs' >
                         <CardContainer user={this.state.user} movies={this.state.clientFavs} />
@@ -281,8 +319,8 @@ class App extends React.Component {
                         />
 
                     </Route>
-                    <Route exact path="/logout" >
-                     
+                    <Route exact path="/movie/view" >
+                        <DetailMovie viewMore={this.state.viewMore}/>
                        
                     </Route>
                     <Route exact path="/admin" >

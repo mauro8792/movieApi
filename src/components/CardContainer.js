@@ -12,7 +12,7 @@ export default class CardContainer extends React.Component{
             <div style={{ backgroundImage : `url(${image_url})`, backgroundRepeat: "repeat", backgroundSize: "300px 300px" }}>
                 <CardDeck style={{"paddingLeft": '10%', "paddingTop": 20, 'marginTop': '5%'}}>
                     {this.props.movies && this.props.movies.map((movie, key)=>(
-                        <MovieCard movie={ movie } user={this.props.user} addFavMovie={this.props.addFavMovie} key={key} />
+                        <MovieCard viewMore={this.props.viewMore} movie={ movie } user={this.props.user} addFavMovie={this.props.addFavMovie} key={key} />
 
                     ))}
                 </CardDeck>
