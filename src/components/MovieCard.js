@@ -5,6 +5,9 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import opcional from '../img/default.gif'
 import MovieService from "../service/movieService.js";
+import {
+    NavLink, Link
+  } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 export default class MovieCard extends React.Component{
@@ -22,9 +25,12 @@ export default class MovieCard extends React.Component{
             confirmButtonText: 'Continuar'
           })
     }
+    ver = (id,e)=>{
+        e.preventDefault()
+        this.props.viewMore(id)
+    }
 
     render(){
-        console.log(this.props.user);
         let url= "https://image.tmdb.org/t/p/w500";
 
         const {movie}= this.props;
@@ -51,7 +57,7 @@ export default class MovieCard extends React.Component{
                                 <Card.Title style={{"color": "#ffbb33", "padding":14}}>{movie.title}</Card.Title>
                                 <Card.Img src={movie.title_original ? url +movie.image : movie.poster_path} style={{width: '100%'}} alt="Card image" />
                                 <Card.ImgOverlay>
-                                <Button variant="outline-light" type="submit" className="float-right">Ver más</Button>
+                                <Button variant="outline-light" type="submit" onClick={(e) => this.ver(movie.id, e)} className="float-right"><Link to='/movie/view' >{"Ver Más"}</Link></Button>
                                 {fav}
                                 </Card.ImgOverlay>
                             </Card>
