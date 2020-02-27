@@ -140,11 +140,21 @@ class App extends React.Component {
     let resultado = movies.find(movie => 
       movie.title.toUpperCase().indexOf(nameMayus) ==! -1 );
     let buscado= [];
-    buscado.push(resultado)
-    this.setState({
-       search : true,
-       forClient: buscado
-    })  
+    if(resultado){
+      buscado.push(resultado)
+  
+      this.setState({
+         search : true,
+         forClient: buscado
+      })  
+    }else{
+      Swal.fire({
+        title: 'Error!',
+        text: 'No se encuentra esa pelicula',
+        icon: 'error',
+        confirmButtonText: 'Volver'
+      })
+    }
   }
 
   filterByCategory= (categoryID)=>{
