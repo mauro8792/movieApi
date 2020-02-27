@@ -27,6 +27,7 @@ class App extends React.Component {
       result : [],
       forClient:[],
       clientFavs:[],
+      filtered: [],
       error : '',
       user:{
         admin : false,
@@ -146,6 +147,26 @@ class App extends React.Component {
     })  
   }
 
+  filterByCategory= (categoryID)=>{
+    let movies= JSON.parse(localStorage.getItem('movieForClient'));
+    let filtered= [];
+    movies.forEach(movie=> {
+      movie.genres.forEach(movieGen=>{
+        if(movieGen.id==categoryID){
+          filtered.push(movie);
+        }
+      })
+    });   
+    console.log(filtered);
+    
+    
+    localStorage.setItem('filtered', JSON.stringify(filtered));
+    this.setState({
+      filtered: JSON.parse(localStorage.getItem('filtered'))
+    })
+    
+  }
+
   addFavMovie= (id)=>{
     let clientfavs=[];
     clientfavs= JSON.parse(localStorage.getItem('clientFavs'));
@@ -224,19 +245,20 @@ class App extends React.Component {
   }
   
  render(){
-    //const image_url = 'https://st4.depositphotos.com/18476196/22335/v/1600/depositphotos_223351002-stock-illustration-cinema-seamless-pattern-could-used.jpg';
     return (
         <>
-        {/*}<div style={{ backgroundImage : `url(${image_url})` }}>{*/}
           <Router>
-            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} />
+            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} filterByCategory={this.filterByCategory} />
 
                 <Switch>
                     <Route exact path='/' >
-                        <CardContainer user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
+                        <CardContainer user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie} /> 
                     </Route>
                     <Route exact path='/favs' >
                         <CardContainer user={this.state.user} movies={this.state.clientFavs} />
+                    </Route>
+                    <Route exact path='/filtered' >
+                        <CardContainer user={this.state.user} movies={this.state.filtered} />
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
@@ -261,7 +283,6 @@ class App extends React.Component {
                     </Route>
                 </Switch>
             </Router>
-           {/*} </div> {*/}
         </>
     );
     

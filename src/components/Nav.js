@@ -29,6 +29,12 @@ export default class Header extends React.Component{
         }
          e.currentTarget.reset();
     }
+
+
+    filterCat= (idCat ,e)=>{
+        e.preventDefault();
+        this.props.filterByCategory(idCat);
+    }
     
     render(){
         let  navLogin, nav ;
@@ -41,7 +47,7 @@ export default class Header extends React.Component{
                             <NavLink to="/favs" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de favoritos</NavLink>   
                             <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
                                 {categories && categories.map((category, key)=>(
-                                <NavDropdown.Item key={key}>{category.name}</NavDropdown.Item> 
+                                <NavDropdown.Item to="/filtered" onClick={(e)=>this.filterCat(category.id, e)} key={key}>{category.name}</NavDropdown.Item> 
                                 ))}
                             </NavDropdown>
                         </Nav>
@@ -54,7 +60,7 @@ export default class Header extends React.Component{
                             <NavLink to="/admin" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
                             <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
                                 {categories && categories.map((category, key)=>(
-                                <NavDropdown.Item key={key}>{category.name}</NavDropdown.Item> 
+                                <NavDropdown.Item to="/filtered" onClick={(e)=>this.filterCat(category.id, e)} key={key}>{category.name}</NavDropdown.Item> 
                                 ))}
                             </NavDropdown>
                             
