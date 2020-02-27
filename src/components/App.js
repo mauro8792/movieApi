@@ -156,14 +156,22 @@ class App extends React.Component {
           filtered.push(movie);
         }
       })
-    });   
-    console.log(filtered);
+    });       
+      localStorage.setItem('filtered', JSON.stringify(filtered));
+      this.setState({
+        filtered: JSON.parse(localStorage.getItem('filtered'))
+      })
+
+  if(!filtered.length){
+    const Swal= require('sweetalert2');
     
-    
-    localStorage.setItem('filtered', JSON.stringify(filtered));
-    this.setState({
-      filtered: JSON.parse(localStorage.getItem('filtered'))
+    Swal.fire({
+      title: 'Error!',
+      text: 'No hay películas de ese género',
+      icon: 'error',
+      confirmButtonText: 'Continuar'
     })
+  }
     
   }
 

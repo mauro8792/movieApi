@@ -37,7 +37,7 @@ export default class Header extends React.Component{
     }
     
     render(){
-        let  navLogin, nav ;
+        let  navLogin, nav, filters ;
         const categories= JSON.parse(localStorage.getItem('genres'));
         if(!this.props.user.login){
             navLogin = <NavLink to="/login" style={{ color: 'white', padding: 10 }} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Iniciar sesión</NavLink>
@@ -45,11 +45,6 @@ export default class Header extends React.Component{
             if(!this.props.user.admin){                
                 nav =  <Nav>
                             <NavLink to="/favs" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de favoritos</NavLink>   
-                            <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
-                                {categories && categories.map((category, key)=>(
-                                <NavDropdown.Item to="/filtered" onClick={(e)=>this.filterCat(category.id, e)} key={key}>{category.name}</NavDropdown.Item> 
-                                ))}
-                            </NavDropdown>
                         </Nav>
                 navLogin =  <Nav>
                                 <Button onClick={this.props.logout } style={{ color: 'white' }}variant="outline-warning">Cerrar </Button>
@@ -58,11 +53,6 @@ export default class Header extends React.Component{
                 nav =   <Nav>
                             <NavLink to="/admin/movies" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Lista de películas</NavLink>
                             <NavLink to="/admin" style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Agregar Película</NavLink>
-                            <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
-                                {categories && categories.map((category, key)=>(
-                                <NavDropdown.Item to="/filtered" onClick={(e)=>this.filterCat(category.id, e)} key={key}>{category.name}</NavDropdown.Item> 
-                                ))}
-                            </NavDropdown>
                             
                         </Nav> 
                 navLogin =  <Nav>
@@ -71,14 +61,21 @@ export default class Header extends React.Component{
                         
             }
       }
+
         return(
             <>
                 <Navbar bg="dark" variant="dark" fixed="top" collapseOnSelect expand="lg">
                 <NavLink to="/" onClick={this.props.inicio} style={{ color: 'white', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>Inicio</NavLink>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Nav className="mr-auto">
+                        <NavDropdown title="Categorias" id="dropdown-button-drop-right" drop='right'>
+                            {categories && categories.map((category, key)=>(
+                            <NavDropdown.Item onClick={(e)=>this.filterCat(category.id, e)} key={key}><NavLink to="/filtered" style={{ color: 'black', padding: 10}} activeStyle={{fontWeight: "bold", color: "#5cb85c"}}>{category.name}</NavLink></NavDropdown.Item> 
+                            ))}
+                        </NavDropdown>
                         {nav}
                      </Nav>
+                     
                     <Form inline onSubmit={this.searchMovie} >
                         <FormControl ref={this.nameMovie} type="text" placeholder="Buscar por nombre" className="mr-sm-2" />
                         <Button type="submit" variant="outline-warning">Buscar</Button>
