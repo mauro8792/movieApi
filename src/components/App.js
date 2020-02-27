@@ -29,6 +29,7 @@ class App extends React.Component {
       forClient:[],
       clientFavs:[],
       viewMore : '',
+      filtered: [],
       user:{
         admin : false,
         login : false
@@ -108,6 +109,11 @@ class App extends React.Component {
     movieService.nowPlayingMovies().then(data=>{
       localStorage.setItem('nowPlayin', JSON.stringify(data.results))
     })
+    movieService.getGenres().then(data=>{
+      console.log(data);
+      
+      localStorage.setItem('genres', JSON.stringify(data))
+    })
     
   }
   inicio = ()=>{
@@ -140,6 +146,34 @@ class App extends React.Component {
        search : true,
        forClient: buscado
     })  
+  }
+
+  filterByCategory= (categoryID)=>{
+    let movies= JSON.parse(localStorage.getItem('movieForClient'));
+    let filtered= [];
+    movies.forEach(movie=> {
+      movie.genres.forEach(movieGen=>{
+        if(movieGen.id==categoryID){
+          filtered.push(movie);
+        }
+      })
+    });       
+      localStorage.setItem('filtered', JSON.stringify(filtered));
+      this.setState({
+        filtered: JSON.parse(localStorage.getItem('filtered'))
+      })
+
+  if(!filtered.length){
+    const Swal= require('sweetalert2');
+    
+    Swal.fire({
+      title: 'Error!',
+      text: 'No hay películas de ese género',
+      icon: 'error',
+      confirmButtonText: 'Continuar'
+    })
+  }
+    
   }
 
   addFavMovie= (id)=>{
@@ -255,20 +289,22 @@ class App extends React.Component {
   }
   
  render(){
-   
-       
+
     return (
         <>
-
           <Router>
-            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} />
+            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} filterByCategory={this.filterByCategory} />
 
                 <Switch>
                     <Route exact path='/' >
                         <CardContainer viewMore={this.viewMore} user={this.state.user} movies={this.state.forClient} addFavMovie={this.addFavMovie}/> 
+
                     </Route>
                     <Route exact path='/favs' >
                         <CardContainer user={this.state.user} movies={this.state.clientFavs} />
+                    </Route>
+                    <Route exact path='/filtered' >
+                        <CardContainer user={this.state.user} movies={this.state.filtered} />
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
@@ -293,8 +329,6 @@ class App extends React.Component {
                     </Route>
                 </Switch>
             </Router>
-
-          {/* <CardContainer search={this.state.search} /> */}
         </>
     );
     

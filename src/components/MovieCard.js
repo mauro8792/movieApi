@@ -45,7 +45,7 @@ export default class MovieCard extends React.Component{
         if(logged){
             fav= <form onSubmit={this.addFav}>
             <input type="hidden" ref={this.idMovie} value={movie.id}/>
-            <Button variant="outline-warning" type="submit" id={movie.id} >★</Button>
+            <Button className="float-right" variant="outline-warning" type="submit" id={movie.id} >★</Button>
             </form>
         }
 
@@ -54,7 +54,7 @@ export default class MovieCard extends React.Component{
                     <Row>
                         <Col sm-3="true" >
                             <Card style={{ width: '18rem', marginBottom: 15 }} className="bg-dark text-white">
-                                <Card.Title style={{"color": "#ffbb33", "padding":14}}>{movie.title}</Card.Title>
+                                <Card.Title style={{"color": "white", "padding":14}}>{movie.title}</Card.Title>
                                 <Card.Img src={movie.title_original ? url +movie.image : movie.poster_path} style={{width: '100%'}} alt="Card image" />
                                 <Card.ImgOverlay>
                                 <Button variant="outline-light" type="submit" onClick={(e) => this.ver(movie.id, e)} className="float-right"><Link to='/movie/view' >{"Ver Más"}</Link></Button>

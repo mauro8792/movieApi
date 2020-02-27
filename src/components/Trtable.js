@@ -9,12 +9,14 @@ export default class Trtable extends React.Component{
         e.preventDefault();
         const Swal = require('sweetalert2');
        MovieService.getMovieForId(this.idMovie.current.value).then(data=>{
+           console.log( "genre", data.genres)
            let movie = {
                id : data.id,
                title : data.title,
                title_original : data.original_title,
                description : data.overview,
-               image : data.poster_path
+               image : data.poster_path, 
+               genres: data.genres
            }
           // console.log(movie);
            
