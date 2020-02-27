@@ -30,6 +30,7 @@ class App extends React.Component {
       clientFavs:[],
       viewMore : '',
       filtered: [],
+      redirect: false,
       user:{
         admin : false,
         login : false
@@ -109,9 +110,7 @@ class App extends React.Component {
     movieService.nowPlayingMovies().then(data=>{
       localStorage.setItem('nowPlayin', JSON.stringify(data.results))
     })
-    movieService.getGenres().then(data=>{
-      console.log(data);
-      
+    movieService.getGenres().then(data=>{      
       localStorage.setItem('genres', JSON.stringify(data))
     })
     
@@ -158,21 +157,22 @@ class App extends React.Component {
         }
       })
     });       
-      localStorage.setItem('filtered', JSON.stringify(filtered));
-      this.setState({
-        filtered: JSON.parse(localStorage.getItem('filtered'))
-      })
-
-  if(!filtered.length){
-    const Swal= require('sweetalert2');
-    
-    Swal.fire({
-      title: 'Error!',
-      text: 'No hay películas de ese género',
-      icon: 'error',
-      confirmButtonText: 'Continuar'
+    localStorage.setItem('filtered', JSON.stringify(filtered));
+    this.setState({
+      filtered: JSON.parse(localStorage.getItem('filtered'))
     })
-  }
+
+    if(!filtered.length){
+      const Swal= require('sweetalert2');
+      
+      Swal.fire({
+        title: 'Error!',
+        text: 'No hay películas de ese género',
+        icon: 'error',
+        confirmButtonText: 'Continuar'
+      })
+      this.setState({ redirect: true })
+    }
     
   }
 
@@ -210,10 +210,15 @@ class App extends React.Component {
     let forclient = []
     let flag = false
     forclient  = JSON.parse(localStorage.getItem('movieForClient'));
-    for (let i = 0; i < forclient.length; i++) {
-      if(forclient[i].title === peli.title){
-        flag = true;
+    if(forclient){
+      for (let i = 0; i < forclient.length; i++) {
+        if(forclient[i].title === peli.title){
+          flag = true;
+        }
       }
+
+    }else{
+      flag =false
     }
     if(!flag){
       if (forclient===null) {
@@ -285,15 +290,16 @@ class App extends React.Component {
        this.setState({
         viewMore : movies.find(movie=> movie.id === id)
       }) 
-      return <Redirect to={'/movie/view'} />
   }
   
  render(){
 
-    return (
-        <>
+   return (
+     <>
           <Router>
-            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} filterByCategory={this.filterByCategory} />
+              {(this.state.redirect ) ? (<Redirect to={'/'} />) : null }
+            <Nav user={this.state.user} search={this.state.search} inicio={this.inicio}
+             logout={this.logout} searchForNameLocal={this.searchForNameLocal} filterByCategory={this.filterByCategory} />
 
                 <Switch>
                     <Route exact path='/' >
@@ -304,7 +310,8 @@ class App extends React.Component {
                         <CardContainer user={this.state.user} movies={this.state.clientFavs} />
                     </Route>
                     <Route exact path='/filtered' >
-                        <CardContainer user={this.state.user} movies={this.state.filtered} />
+                      <CardContainer user={this.state.user} movies={this.state.filtered} />
+                      
                     </Route>
                     <Route exact path="/movies/create" >    
                       <Movie addMovie = {this.addMovie}/> 
