@@ -224,9 +224,10 @@ class App extends React.Component {
   }
   
  render(){
-       
+    //const image_url = 'https://st4.depositphotos.com/18476196/22335/v/1600/depositphotos_223351002-stock-illustration-cinema-seamless-pattern-could-used.jpg';
     return (
         <>
+        {/*}<div style={{ backgroundImage : `url(${image_url})` }}>{*/}
           <Router>
             <Nav user={this.state.user} search={this.state.search} inicio={this.inicio} logout={this.logout} searchForNameLocal={this.searchForNameLocal} />
 
@@ -260,6 +261,7 @@ class App extends React.Component {
                     </Route>
                 </Switch>
             </Router>
+           {/*} </div> {*/}
         </>
     );
     
